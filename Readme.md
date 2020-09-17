@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Михаил Акулов](https://up.htmlacademy.ru/javascript/21/user/1420523).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Пальчук](https://htmlacademy.ru/profile/bulletok).
 
 ---
 
