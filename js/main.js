@@ -80,9 +80,18 @@ for (let i = 0; i < posts.length; i++) {
   let pictureElement = pictureTemplate.cloneNode(true);
   pictureElement.querySelector(`.picture__img`).src = post.url;
   pictureElement.querySelector(`.picture__likes`).textContent = post.likes;
-  pictureElement.querySelector(`.picture__comments`).textContent =
-    post.comments.length;
+  pictureElement.querySelector(`.picture__comments`).textContent = post.comments.length;
+  fragment.appendChild(pictureElement);
+}
+pictureContainer.appendChild(fragment);
 
+for (let i = 0; i < posts.length; i++) {
+  let post = posts[i];
+  let pictureElement = pictureTemplate.cloneNode(true);
+  pictureElement.querySelector(`.big-picture__img`).src = post.url;
+  pictureElement.querySelector(`.likes-count`).textContent = post.likes;
+  pictureElement.querySelector(`.comments-count`).textContent = post.comments.length;
+  pictureElement.querySelector(`.social__caption`).textContent = post.description;
   fragment.appendChild(pictureElement);
 }
 pictureContainer.appendChild(fragment);
