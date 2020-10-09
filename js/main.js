@@ -87,11 +87,56 @@ pictureContainer.appendChild(fragment);
 
 for (let i = 0; i < posts.length; i++) {
   let post = posts[i];
-  let pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector(`.big-picture__img`).src = post.url;
-  pictureElement.querySelector(`.likes-count`).textContent = post.likes;
-  pictureElement.querySelector(`.comments-count`).textContent = post.comments.length;
-  pictureElement.querySelector(`.social__caption`).textContent = post.description;
-  fragment.appendChild(pictureElement);
+  let bigPicture = pictureTemplate.cloneNode(true);
+  bigPicture.querySelector(`.big-picture__img`).src = post.url;
+  bigPicture.querySelector(`.likes-count`).textContent = post.likes;
+  bigPicture.querySelector(`.comments-count`).textContent = post.comments.length;
+  bigPicture.querySelector(`.social__caption`).textContent = post.description;
+  fragment.appendChild(bigPicture);
 }
 pictureContainer.appendChild(fragment);
+
+
+let bigPicture = document.querySelector(`.big-picture`);
+let bigPictureCancel = bigPicture.querySelector(`#picture-cancel`);
+
+
+let closeBigPicture = () => {
+  bigPicture.classList.add(`hidden`);
+
+  document.removeEventListener(`keydown`, onBigPictureEscPress);
+};
+
+let onBigPictureEscPress = (evt) => {
+  if (evt.key === `Escape`) {
+    evt.preventDefault();
+    bigPicture.classList.add(`hidden`);
+  }
+};
+
+bigPictureCancel.addEventListener(`click`, closeBigPicture);
+document.addEventListener(`keydown`, onBigPictureEscPress);
+
+
+let uploadForm = document.querySelector(`.img-upload__form`);
+let uploadOverlay = uploadForm.querySelector(`.img-upload__overlay`);
+let textHashtagsInput = uploadOverlay.querySelector(`.text__hashtags`);
+let MIN_HASHTAG_LENGTH = 2;
+
+textHashtagsInput.addEventListener(`input`, function () {
+  const valueLength = textHashtagsInput.value.length;
+  const hashTag = textHashtagsInput.value;
+  const re = /^[\b#[\w\d]{1,20}\b]?$/;
+
+
+  if (re.test(hashTag)) {
+    textHashtagsInput.setCustomValidity(`Строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., максимальная длина одного хэш-тега 20 символов, включая решётку.`);
+  } else if (valueLength < MIN_HASHTAG_LENGTH) {
+    textHashtagsInput.setCustomValidity(`Ещё ` + (MIN_HASHTAG_LENGTH - valueLength) + ` симв.`);
+  } else {
+    textHashtagsInput.setCustomValidity(``);
+  }
+
+  textHashtagsInput.reportValidity();
+
+});
