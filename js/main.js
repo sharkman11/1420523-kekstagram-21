@@ -287,7 +287,7 @@ let onChangeEffect = function (effect) {
 
 uploadFile.onchange = function () {
   uploadOverlay.classList.remove(`hidden`);
-  document.classList.add(`modal-open`);
+  document.body.classList.add(`modal-open`);
 
   effectLevelSlider.classList.add(`hidden`);
 
@@ -321,7 +321,7 @@ let onErrorCheck = function () {
       hastagArray.forEach((hashTag) => {
         hashTag = hashTag.toLowerCase();
         if (!re.test(hashTag)) {
-          hashtagInput.setCustomValidity(`Хештег должен соответсвовать критериям`);
+          hashtagInput.setCustomValidity(`Хештег должен содержать в себе данные символы (a-z A-Z 0-9 _).  Количество символов от 1 до 19.`);
           errorsCount += 1;
 
         } else if (hashTag === tagLeft) {
