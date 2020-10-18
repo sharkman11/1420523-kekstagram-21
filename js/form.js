@@ -8,63 +8,21 @@
   let MIN_SCALE = 25;
   let SCALE_STEP = 25;
 
-  let uploadForm = document.querySelector(`.img-upload__form`);
-  let uploadOverlay = uploadForm.querySelector(`.img-upload__overlay`);
-  let uploadFile = uploadForm.querySelector(`#upload-file`);
-  let preview = uploadOverlay.querySelector(`.img-upload__preview img`);
-  let closeButton = uploadOverlay.querySelector(`.img-upload__cancel`);
-  let effectsList = uploadOverlay.querySelectorAll(`.effects__radio`);
-  let effectLevelSlider = uploadOverlay.querySelector(`.img-upload__effect-level`);
+  let preview = window.main.uploadOverlay.querySelector(`.img-upload__preview img`);
+  let effectsList = window.main.uploadOverlay.querySelectorAll(`.effects__radio`);
+  let effectLevelSlider = window.main.uploadOverlay.querySelector(`.img-upload__effect-level`);
   let effectLevelLine = effectLevelSlider.querySelector(`.effect-level__line`);
   let effectLevelPin = effectLevelSlider.querySelector(`.effect-level__pin`);
   let effectLevelDepth = effectLevelSlider.querySelector(`.effect-level__depth`);
   let effectLevelValue = effectLevelSlider.querySelector(`.effect-level__value`);
-  let hashtagInput = uploadOverlay.querySelector(`.text__hashtags`);
+  let hashtagInput = window.main.uploadOverlay.querySelector(`.text__hashtags`);
 
   let effectValue = ``;
 
-  let scaleControlSmaller = uploadOverlay.querySelector(`.scale__control--smaller`);
-  let scaleControlBigger = uploadOverlay.querySelector(`.scale__control--bigger`);
-  let scaleControlValue = uploadOverlay.querySelector(`.scale__control--value`);
+  let scaleControlSmaller = window.main.uploadOverlay.querySelector(`.scale__control--smaller`);
+  let scaleControlBigger = window.main.uploadOverlay.querySelector(`.scale__control--bigger`);
+  let scaleControlValue = window.main.uploadOverlay.querySelector(`.scale__control--value`);
 
-
-  let uploadPhoto = () => {
-    let file = uploadFile.files[0];
-    let reader = new FileReader();
-
-    reader.addEventListener(`loadend`, () => {
-      preview.src = reader.result;
-    });
-
-    if (file) {
-      reader.readAsDataURL(file);
-    } else {
-      preview.src = ``;
-    }
-
-    uploadOverlay.classList.remove(`hidden`);
-  };
-  uploadFile.addEventListener(`change`, uploadPhoto);
-
-  let uploadCancel = uploadForm.querySelector(`#upload-cancel`);
-
-  let closeUploadForm = () => {
-    uploadOverlay.classList.add(`hidden`);
-    document.removeEventListener(`keydown`, onUploadOverlayEscPress);
-    uploadFile.value = ``;
-  };
-
-  let onUploadOverlayEscPress = (evt) => {
-    if (evt.key === `Escape`) {
-      evt.preventDefault();
-      uploadOverlay.classList.add(`hidden`);
-    }
-    uploadFile.value = ``;
-  };
-
-
-  uploadCancel.addEventListener(`click`, closeUploadForm);
-  document.addEventListener(`keydown`, onUploadOverlayEscPress);
 
   let changeScale = function (direction) {
     let currentValue = scaleControlValue.value.substring(0, scaleControlValue.value.length - 1);
@@ -149,6 +107,7 @@
     document.addEventListener(`mouseup`, onMouseUp);
   };
 
+
   let onChangeEffect = function (effect) {
     effectValue = effect.value;
     if (effectValue === `none`) {
@@ -166,14 +125,11 @@
     }
   };
 
-  uploadFile.onchange = function () {
-    uploadOverlay.classList.remove(`hidden`);
+  window.main.uploadFile.onchange = function () {
+    window.main.uploadOverlay.classList.remove(`hidden`);
     document.body.classList.add(`modal-open`);
 
     effectLevelSlider.classList.add(`hidden`);
-
-    closeButton.addEventListener(`click`, closeUploadForm);
-    document.addEventListener(`keydown`, onUploadOverlayEscPress);
 
     effectsList.forEach((effect) => {
       effect.addEventListener(`change`, function () {
@@ -184,6 +140,7 @@
     scaleControlSmaller.addEventListener(`click`, onScaleButtonSmallerPress);
     scaleControlBigger.addEventListener(`click`, onScaleButtonBiggerPress);
   };
+
 
   let onErrorCheck = function () {
     let hastagArray = hashtagInput.value.split(` `).sort();
@@ -227,12 +184,12 @@
     }
     return errorsCount;
   };
+
   hashtagInput.addEventListener(`input`, function () {
     onErrorCheck();
   });
 
-  uploadForm.addEventListener(`submit`, function () {
+  window.main.uploadForm.addEventListener(`submit`, function () {
     onErrorCheck();
   });
-
 })();
