@@ -1,6 +1,6 @@
 "use strict";
 
-(function () {
+(() => {
   let uploadForm = document.querySelector(`.img-upload__form`);
   let uploadOverlay = uploadForm.querySelector(`.img-upload__overlay`);
   let uploadFile = uploadForm.querySelector(`#upload-file`);
@@ -62,11 +62,11 @@
     preview.style.transform = `scale(` + newValue / 100 + `)`;
   };
 
-  let onScaleButtonSmallerPress = function () {
+  let onScaleButtonSmallerPress = () => {
     changeScale(`smaller`);
   };
 
-  let onScaleButtonBiggerPress = function () {
+  let onScaleButtonBiggerPress = () =>{
     changeScale(`bigger`);
   };
 
@@ -137,7 +137,7 @@
     document.addEventListener(`mouseup`, onMouseUp);
   };
 
-  let onChangeEffect = function (effect) {
+  let oninputEffect = function (effect) {
     effectValue = effect.value;
     if (effectValue === `none`) {
       preview.removeAttribute(`class`);
@@ -155,15 +155,15 @@
   };
 
 
-  const init = () => {
-    uploadFile.addEventListener(`change`, function () {
+  let init = () => {
+    uploadFile.addEventListener(`change`, () => {
       uploadOverlay.classList.remove(`hidden`);
       document.body.classList.add(`modal-open`);
       effectLevelSlider.classList.add(`hidden`);
 
       effectsList.forEach((effect) => {
-        effect.addEventListener(`change`, function () {
-          onChangeEffect(effect);
+        effect.addEventListener(`change`, () => {
+          oninputEffect(effect);
         });
       });
       scaleControlValue.value = MAX_SCALE + `%`;

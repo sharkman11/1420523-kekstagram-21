@@ -1,9 +1,9 @@
 "use strict";
 
-(function () {
-  let pictureTemplate = document.querySelector(`#picture`).content;
-  let pictureContainer = document.querySelector(`.pictures`);
-  let fragment = document.createDocumentFragment();
+(() => {
+  const pictureTemplate = document.querySelector(`#picture`).content;
+  const pictureContainer = document.querySelector(`.pictures`);
+  const fragment = document.createDocumentFragment();
 
   const gallery = (posts) => {
     for (let i = 0; i < posts.length; i++) {

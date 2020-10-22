@@ -1,22 +1,22 @@
 "use strict";
-(function () {
+(() => {
 
-  let uploadForm = document.querySelector(`.img-upload__form`);
-  let uploadOverlay = uploadForm.querySelector(`.img-upload__overlay`);
-  let uploadFile = uploadForm.querySelector(`#upload-file`);
+  const uploadForm = document.querySelector(`.img-upload__form`);
+  const uploadOverlay = uploadForm.querySelector(`.img-upload__overlay`);
+  const uploadFile = uploadForm.querySelector(`#upload-file`);
 
-  let closeButton = uploadOverlay.querySelector(`.img-upload__cancel`);
-  let uploadCancel = uploadForm.querySelector(`#upload-cancel`);
+  const closeButton = uploadOverlay.querySelector(`.img-upload__cancel`);
+  const uploadCancel = uploadForm.querySelector(`#upload-cancel`);
 
-  let hashtagInput = uploadOverlay.querySelector(`.text__hashtags`);
+  const hashtagInput = uploadOverlay.querySelector(`.text__hashtags`);
 
-  let closeUploadForm = () => {
+  const closeUploadForm = () => {
     uploadOverlay.classList.add(`hidden`);
     document.removeEventListener(`keydown`, onUploadOverlayEscPress);
     uploadFile.value = ``;
   };
 
-  let onUploadOverlayEscPress = (evt) => {
+  const onUploadOverlayEscPress = (evt) => {
     if (evt.key === `Escape`) {
       evt.preventDefault();
       uploadOverlay.classList.add(`hidden`);
@@ -24,9 +24,9 @@
     uploadFile.value = ``;
   };
 
-  let onErrorCheck = function () {
+  let onErrorCheck = () => {
     let hastagArray = hashtagInput.value.split(` `).sort();
-    let re = /^#[\w]{1,19}$/;
+    let re = /^#[a-zA-Zа-яА-ЯёЁ0-9]{1,19}$/;
     let errorsCount = 0;
     let tagLeft = ``;
 
@@ -41,7 +41,7 @@
         hastagArray.forEach((hashTag) => {
           hashTag = hashTag.toLowerCase();
           if (!re.test(hashTag)) {
-            hashtagInput.setCustomValidity(`Хештег должен содержать в себе данные символы (a-z A-Z 0-9 _).  Количество символов от 1 до 19.`);
+            hashtagInput.setCustomValidity(`Хештег должен содержать в себе данные символы (a-z,A-Z,а-я,А-Я,ё Ё,0-9 _).  Количество символов от 1 до 19.`);
             errorsCount += 1;
           } else if (hashTag === tagLeft) {
             hashtagInput.setCustomValidity(`У вас есть повторяющиеся хэштеги`);
@@ -71,11 +71,11 @@
     closeButton.addEventListener(`click`, closeUploadForm);
     document.addEventListener(`keydown`, onUploadOverlayEscPress);
 
-    hashtagInput.addEventListener(`input`, function () {
+    hashtagInput.addEventListener(`input`, () => {
       onErrorCheck();
     });
 
-    uploadForm.addEventListener(`submit`, function () {
+    uploadForm.addEventListener(`submit`, () => {
       onErrorCheck();
     });
   };

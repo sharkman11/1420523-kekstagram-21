@@ -1,10 +1,10 @@
 "use strict";
 
-(function () {
-  let bigPicture = document.querySelector(`.big-picture`);
-  let bigPictureCancel = bigPicture.querySelector(`#picture-cancel`);
+(() => {
+  const bigPicture = document.querySelector(`.big-picture`);
+  const bigPictureCancel = bigPicture.querySelector(`#picture-cancel`);
 
-  let openBigPicture = (post) => {
+  const openBigPicture = (post) => {
     bigPicture.classList.remove(`hidden`);
     document.body.classList.add(`modal-open`);
 
@@ -14,7 +14,7 @@
     bigPictureCancel.addEventListener(`click`, closeBigPicture);
   };
 
-  let closeBigPicture = () => {
+  const closeBigPicture = () => {
     bigPicture.classList.add(`hidden`);
     document.body.classList.remove(`modal-open`);
 
@@ -22,7 +22,7 @@
     bigPictureCancel.removeEventListener(`click`, closeBigPicture);
   };
 
-  let onBigPictureEscPress = (evt) => {
+  const onBigPictureEscPress = (evt) => {
     if (evt.key === `Escape`) {
       evt.preventDefault();
       bigPicture.classList.add(`hidden`);
