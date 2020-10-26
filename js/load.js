@@ -14,7 +14,7 @@
       if (xhr.status === 200) {
         onSuccess(xhr.response);
       } else {
-        onError(`Статус ответа: ` + xhr.status + ` ` + xhr.statusText);
+        onError(`Статус ответа:  ${ xhr.status }  ${ xhr.status }`);
       }
     });
 
@@ -23,7 +23,7 @@
     });
 
     xhr.addEventListener(`timeout`, () => {
-      onError(`Запрос не успел выполниться за ` + xhr.timeout + `мс`);
+      onError(`Запрос не успел выполниться за ${ xhr.timeout }мс`);
     });
 
     xhr.open(`GET`, URL);
