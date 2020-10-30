@@ -1,8 +1,9 @@
 'use strict';
 (() => {
-  const DEBOUNCE_INTERVAL = 500;
 
-  window.debounce = (cb) => {
+
+  window.debounce = (cb, DEBOUNCE_INTERVAL) => {
+    DEBOUNCE_INTERVAL = 500;
     let delay = false;
 
     return (...parameters) => {

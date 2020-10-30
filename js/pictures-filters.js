@@ -11,7 +11,7 @@
     const randomArray = [];
     for (let i = 0; i < RANDOM_PHOTO_QUANTITY;) {
       const picture = window.utilModule.getRandomArrayItem(array);
-      if (!randomArray.includes(picture, 0)) {
+      if (!randomArray.includes(picture)) {
         randomArray.push(picture);
         i++;
       }
@@ -31,9 +31,9 @@
     return discussedArray;
   };
   const filterToggle = (newFilterElement) => {
-    for (let i = 0; i < filterButtons.length; i++) {
-      filterButtons[i].classList.remove(`img-filters__button--active`);
-    }
+    filterButtons.forEach((button) => {
+      button.classList.remove(`img-filters__button--active`);
+    });
     newFilterElement.classList.add(`img-filters__button--active`);
   };
 
