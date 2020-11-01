@@ -2,8 +2,7 @@
 (() => {
 
 
-  window.debounce = (cb, DEBOUNCE_INTERVAL) => {
-    DEBOUNCE_INTERVAL = 500;
+  window.debounce = (cb, debounceInterval = 500) => {
     let delay = false;
 
     return (...parameters) => {
@@ -12,7 +11,7 @@
         delay = true;
         setTimeout(() => {
           delay = false;
-        }, DEBOUNCE_INTERVAL);
+        }, debounceInterval);
       }
     };
   };
