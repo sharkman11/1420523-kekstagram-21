@@ -5,6 +5,7 @@
   const pictureContainer = document.querySelector(`.pictures`);
   const fragment = document.createDocumentFragment();
 
+
   const renderPictures = (posts) => {
     posts.forEach((post) => {
       const pictureElement = pictureTemplate.cloneNode(true);
