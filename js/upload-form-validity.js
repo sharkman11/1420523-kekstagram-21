@@ -15,35 +15,30 @@
   const onHashtagInputInput = () => {
     if (hashtagsInput.value) {
       const hashtags = hashtagsInput.value.toLowerCase().split(` `);
-      for (let i = 0; i < hashtags.length; i++) {
-        if (hashtags[i] === ``) {
-          hashtags.splice(i, 1);
+      hashtags.forEach((hashTags) => {
+        if (hashTags === ``) {
+          hashTags.splice(1);
         }
-      }
+      });
 
       if (hashtags.length > HASHTAGS_MAX_QUANTITY) {
         hashtagsInput.setCustomValidity(`Нельзя указать больше ${HASHTAGS_MAX_QUANTITY} хэштегов`);
       } else {
-        for (let i = 0; i < hashtags.length; i++) {
+        hashtags.forEach((i) => {
           if (hashtags.includes(hashtags[i], i + 1)) {
             hashtagsInput.setCustomValidity(`Один и тот же хэштег не может быть использован дважды`);
-            break;
           } else if (hashtags[i].length > HASHTAGS_MAX_LENGTH) {
             hashtagsInput.setCustomValidity(`Длина хэштега не должна превышать ${HASHTAGS_MAX_LENGTH} симв.`);
-            break;
           } else if (hashtags[i][0] !== `#`) {
             hashtagsInput.setCustomValidity(`Хэштег должен начинаеться с символа решётки`);
-            break;
           } else if (hashtags[i].length === 1) {
             hashtagsInput.setCustomValidity(`Хэштег не должен состоять только из одной решётки`);
-            break;
           } else if (!regExp.test(hashtags[i])) {
             hashtagsInput.setCustomValidity(`Хэштег не должен содержать специальных символов`);
-            break;
           } else {
             hashtagsInput.setCustomValidity(``);
           }
-        }
+        });
       }
     } else {
       hashtagsInput.setCustomValidity(``);

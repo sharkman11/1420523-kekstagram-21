@@ -48,9 +48,9 @@
     const hiddenComments = Array.from(commentsList.querySelectorAll(`.hidden`));
 
     const сommentsToShow = (hiddenComments.length <= COMMENTS_STEP) ? hiddenComments.length : COMMENTS_STEP;
-    for (let i = 0; i < сommentsToShow; i++) {
-      hiddenComments[i].classList.remove(`hidden`);
-    }
+    сommentsToShow.forEach((hideComments) => {
+      hideComments.classList.remove(`hidden`);
+    });
 
     hiddenComments.splice(0, сommentsToShow);
 

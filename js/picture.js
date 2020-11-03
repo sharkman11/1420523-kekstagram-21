@@ -19,11 +19,10 @@
 
   let uploadPhoto = () => {
     const uploadFileURL = URL.createObjectURL(uploadFile.files[0]);
-
     preview.src = uploadFileURL;
-    for (let i = 0; i < effectsPrewiews.length; i++) {
-      effectsPrewiews[i].style.backgroundImage = `url(${uploadFileURL})`;
-    }
+    effectsPrewiews.forEach((previewEffect) => {
+      previewEffect.style.backgroundImage = `url(${uploadFileURL})`;
+    });
   };
   const getDefaultFormSettings = () => {
     uploadForm.reset();
