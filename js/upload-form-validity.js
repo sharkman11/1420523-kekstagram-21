@@ -24,16 +24,16 @@
       if (hashtags.length > HASHTAGS_MAX_QUANTITY) {
         hashtagsInput.setCustomValidity(`Нельзя указать больше ${HASHTAGS_MAX_QUANTITY} хэштегов`);
       } else {
-        hashtags.forEach((i) => {
-          if (hashtags.includes(hashtags[i], i + 1)) {
+        hashtags.forEach((htg, i) => {
+          if (hashtags.includes(htg, i + 1)) {
             hashtagsInput.setCustomValidity(`Один и тот же хэштег не может быть использован дважды`);
-          } else if (hashtags[i].length > HASHTAGS_MAX_LENGTH) {
+          } else if (htg.length > HASHTAGS_MAX_LENGTH) {
             hashtagsInput.setCustomValidity(`Длина хэштега не должна превышать ${HASHTAGS_MAX_LENGTH} симв.`);
-          } else if (hashtags[i][0] !== `#`) {
+          } else if (htg[0] !== `#`) {
             hashtagsInput.setCustomValidity(`Хэштег должен начинаеться с символа решётки`);
-          } else if (hashtags[i].length === 1) {
+          } else if (htg.length === 1) {
             hashtagsInput.setCustomValidity(`Хэштег не должен состоять только из одной решётки`);
-          } else if (!regExp.test(hashtags[i])) {
+          } else if (!regExp.test(htg)) {
             hashtagsInput.setCustomValidity(`Хэштег не должен содержать специальных символов`);
           } else {
             hashtagsInput.setCustomValidity(``);
