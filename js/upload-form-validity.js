@@ -17,7 +17,7 @@
       const hashtags = hashtagsInput.value.toLowerCase().split(` `);
       hashtags.forEach((hashTags) => {
         if (hashTags === ``) {
-          hashTags.splice(1);
+          hashtags.splice(1);
         }
       });
 
