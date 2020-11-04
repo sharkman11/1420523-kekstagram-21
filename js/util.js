@@ -1,5 +1,7 @@
 'use strict';
 (() => {
+  const getRatio = (minRangeValue, maxRangeValue, percent) => (maxRangeValue - minRangeValue) * percent / 100 + minRangeValue;
+
   const getRandomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
 
   const getRandomArrayItem = (array) => array[getRandomInteger(0, array.length - 1)];
@@ -15,6 +17,7 @@
   };
 
   window.utilModule = {
+    getRatio,
     getRandomInteger,
     getRandomArrayItem,
     clearElement,
