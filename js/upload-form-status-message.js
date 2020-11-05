@@ -21,10 +21,7 @@
   };
 
   const onStatusMessageEscPress = (evt) => {
-    if (evt.key === `Escape`) {
-      evt.preventDefault();
-      closeStatusMessage();
-    }
+    window.utilModule.isEscEvent(evt, closeStatusMessage);
   };
 
   const onStatusMessageOutsideClick = (evt) => {

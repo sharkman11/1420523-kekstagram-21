@@ -1,21 +1,18 @@
 "use strict";
 
 (() => {
-  const URL = `https://21.javascript.pages.academy/kekstagram/data`;
-
-  const TIMEOUT_IN_MS = 10000;
   const STATUS_CODE_OK = 200;
 
-  window.load = (onSuccess, onError) => {
+  window.load = (serverURL, method, onSuccess, onError, timeout, data) => {
     const xhr = new XMLHttpRequest();
     xhr.responseType = `json`;
-    xhr.timeout = TIMEOUT_IN_MS;
+    xhr.timeout = timeout;
 
     xhr.addEventListener(`load`, () => {
       if (xhr.status === STATUS_CODE_OK) {
         onSuccess(xhr.response);
       } else {
-        onError(`Статус ответа:  ${ xhr.status }  ${ xhr.status }`);
+        onError(`Статус ответа: ` + xhr.status + ` ` + xhr.statusText);
       }
     });
 
@@ -24,10 +21,15 @@
     });
 
     xhr.addEventListener(`timeout`, () => {
-      onError(`Запрос не успел выполниться за ${ xhr.timeout }мс`);
+      onError(`Запрос не успел выполниться за ` + xhr.timeout + `мс`);
     });
 
-    xhr.open(`GET`, URL);
-    xhr.send();
+    xhr.open(method, serverURL);
+
+    if (data) {
+      xhr.send(data);
+    } else {
+      xhr.send();
+    }
   };
 })();

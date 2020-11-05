@@ -94,10 +94,7 @@
   };
 
   const onBigPictureEscPress = (evt) => {
-    if (evt.key === `Escape`) {
-      evt.preventDefault();
-      bigPicture.classList.add(`hidden`);
-    }
+    window.utilModule.isEscEvent(evt, closeBigPicture);
   };
 
   window.previewModule = {

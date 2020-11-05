@@ -31,10 +31,11 @@
   };
 
   const onUploadPopupEscPress = (evt) => {
-    if (evt.key === `Escape` && document.activeElement !== hashtagsInput && document.activeElement !== commentInput) {
-      evt.preventDefault();
-      closeUploadPopup();
-    }
+    window.utilModule.isEscEvent(evt, () => {
+      if (document.activeElement !== hashtagsInput && document.activeElement !== commentInput) {
+        closeUploadPopup();
+      }
+    });
   };
 
   const onUploadFormSubmit = (evt) => {

@@ -16,10 +16,18 @@
     }
   };
 
+  const isEscEvent = (evt, action) => {
+    if (evt.key === `Escape`) {
+      evt.preventDefault();
+      action();
+    }
+  };
+
   window.utilModule = {
     getRatio,
     getRandomInteger,
     getRandomArrayItem,
     clearElement,
+    isEscEvent
   };
 })();
