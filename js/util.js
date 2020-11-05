@@ -1,33 +1,38 @@
-'use strict';
-(() => {
-  const getRatio = (minRangeValue, maxRangeValue, percent) => (maxRangeValue - minRangeValue) * percent / 100 + minRangeValue;
+"use strict";
 
-  const getRandomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
+const getRatio = (minRangeValue, maxRangeValue, percent) =>
+  ((maxRangeValue - minRangeValue) * percent) / 100 + minRangeValue;
 
-  const getRandomArrayItem = (array) => array[getRandomInteger(0, array.length - 1)];
+const getRandomInteger = (min, max) =>
+  Math.floor(min + Math.random() * (max + 1 - min));
 
-  const clearElement = (element, exceptionsArray) => {
-    const children = element.children;
+const getRandomArrayItem = (array) =>
+  array[getRandomInteger(0, array.length - 1)];
 
-    for (let i = children.length - 1; i >= 0; i--) {
-      if (!exceptionsArray || !exceptionsArray.includes(children[i].tagName.toLowerCase(), 0)) {
-        element.removeChild(children[i]);
-      }
+const clearElement = (element, exceptionsArray) => {
+  const children = element.children;
+
+  for (let i = children.length - 1; i >= 0; i--) {
+    if (
+      !exceptionsArray ||
+      !exceptionsArray.includes(children[i].tagName.toLowerCase(), 0)
+    ) {
+      element.removeChild(children[i]);
     }
-  };
+  }
+};
 
-  const isEscEvent = (evt, action) => {
-    if (evt.key === `Escape`) {
-      evt.preventDefault();
-      action();
-    }
-  };
+const isEscEvent = (evt, action) => {
+  if (evt.key === `Escape`) {
+    evt.preventDefault();
+    action();
+  }
+};
 
-  window.utilModule = {
-    getRatio,
-    getRandomInteger,
-    getRandomArrayItem,
-    clearElement,
-    isEscEvent
-  };
-})();
+window.utilModule = {
+  getRatio,
+  getRandomInteger,
+  getRandomArrayItem,
+  clearElement,
+  isEscEvent,
+};

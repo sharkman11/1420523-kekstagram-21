@@ -1,66 +1,66 @@
 "use strict";
-(() => {
-  const RANDOM_PHOTO_QUANTITY = 10;
 
-  const filtersContainer = document.querySelector(`.img-filters`);
-  const filterButtons = filtersContainer.querySelectorAll(`.img-filters__button`);
+const RANDOM_PHOTO_QUANTITY = 10;
 
-  const picturesContainer = document.querySelector(`.pictures`);
+const filtersContainer = document.querySelector(`.img-filters`);
+const filterButtons = filtersContainer.querySelectorAll(`.img-filters__button`);
 
-  const getRandomArray = (array) => {
-    const randomArray = [];
-    for (let i = 0; i < RANDOM_PHOTO_QUANTITY;) {
-      const picture = window.utilModule.getRandomArrayItem(array);
-      if (!randomArray.includes(picture)) {
-        randomArray.push(picture);
-        i++;
-      }
+const picturesContainer = document.querySelector(`.pictures`);
+
+const getRandomArray = (array) => {
+  const randomArray = [];
+  for (let i = 0; i < RANDOM_PHOTO_QUANTITY;) {
+    const picture = window.utilModule.getRandomArrayItem(array);
+    if (!randomArray.includes(picture)) {
+      randomArray.push(picture);
+      i++;
     }
-    return randomArray;
-  };
+  }
+  return randomArray;
+};
 
-  const getDiscussedArray = (array) => {
-    const discussedArray = array.slice(0).sort((left, right) => {
-      let commentDiff = right.comments.length - left.comments.length;
+const getDiscussedArray = (array) => {
+  const discussedArray = array.slice(0).sort((left, right) => {
+    let commentDiff = right.comments.length - left.comments.length;
 
-      if (commentDiff === 0) {
-        commentDiff = 1;
-      }
-      return commentDiff;
-    });
-    return discussedArray;
-  };
-  const filterToggle = (newFilterElement) => {
-    filterButtons.forEach((button) => {
-      button.classList.remove(`img-filters__button--active`);
-    });
-    newFilterElement.classList.add(`img-filters__button--active`);
-  };
+    if (commentDiff === 0) {
+      commentDiff = 1;
+    }
+    return commentDiff;
+  });
+  return discussedArray;
+};
+const filterToggle = (newFilterElement) => {
+  filterButtons.forEach((button) => {
+    button.classList.remove(`img-filters__button--active`);
+  });
+  newFilterElement.classList.add(`img-filters__button--active`);
+};
 
-  const onFilterClick = (array) => {
-    return window.debounce((evt) => {
-      let sortArray;
+const onFilterClick = (array) => {
+  return window.debounce((evt) => {
+    let sortArray;
 
-      if (evt.target.matches(`#filter-random`)) {
-        sortArray = getRandomArray(array);
-      } else if (evt.target.matches(`#filter-discussed`)) {
-        sortArray = getDiscussedArray(array);
-      } else {
-        sortArray = array;
-      }
+    if (evt.target.matches(`#filter-random`)) {
+      sortArray = getRandomArray(array);
+    } else if (evt.target.matches(`#filter-discussed`)) {
+      sortArray = getDiscussedArray(array);
+    } else {
+      sortArray = array;
+    }
 
-      window.utilModule.clearElement(picturesContainer, [`h2`, `section`]);
-      window.picturesRenderingModule.renderPictures(sortArray);
-      filterToggle(evt.target);
-    });
-  };
+    window.utilModule.clearElement(picturesContainer, [`h2`, `section`]);
+    window.picturesRenderingModule.renderPictures(sortArray);
+    filterToggle(evt.target);
+  });
+};
 
-  const activateFilters = (array) => {
-    filtersContainer.classList.remove(`img-filters--inactive`);
-    filtersContainer.addEventListener(`click`, onFilterClick(array));
-  };
+const activateFilters = (array) => {
+  filtersContainer.classList.remove(`img-filters--inactive`);
+  filtersContainer.addEventListener(`click`, onFilterClick(array));
+};
 
-  window.picturesFiltersModule = {
-    activateFilters,
-  };
-})();
+window.picturesFiltersModule = {
+  activateFilters,
+};
+

@@ -1,18 +1,14 @@
-'use strict';
-(() => {
+"use strict";
+window.debounce = (cb, debounceInterval = 500) => {
+  let delay = false;
 
-
-  window.debounce = (cb, debounceInterval = 500) => {
-    let delay = false;
-
-    return (...parameters) => {
-      if (!delay) {
-        cb(...parameters);
-        delay = true;
-        setTimeout(() => {
-          delay = false;
-        }, debounceInterval);
-      }
-    };
+  return (...parameters) => {
+    if (!delay) {
+      cb(...parameters);
+      delay = true;
+      setTimeout(() => {
+        delay = false;
+      }, debounceInterval);
+    }
   };
-})();
+};
