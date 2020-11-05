@@ -1,7 +1,5 @@
 "use strict";
 
-const URL = `https://21.javascript.pages.academy/kekstagram`;
-
 const TIMEOUT_IN_MS = 10000;
 
 window.upload = (data, onSuccess, onError) => {
